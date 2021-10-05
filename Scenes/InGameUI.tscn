@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scenes/LaserSelector.tscn" type="PackedScene" id=1]
+
+[node name="InGameUI" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="LaserSelector" parent="Node2D" instance=ExtResource( 1 )]
+margin_left = 912.629
+margin_top = -270.056
+margin_right = 1232.63
+margin_bottom = -190.056
