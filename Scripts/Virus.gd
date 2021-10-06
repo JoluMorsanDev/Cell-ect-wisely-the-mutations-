@@ -30,9 +30,9 @@ func _process(delta):
 #Get the gen to change things
 func GetGen():
 	if Gen == 1:
-		$ReproductionTimer.wait_time = rand_range(1.75, 2.25)
+		$ReproductionTimer.wait_time = rand_range(3.75, 4.25)
 	else:
-		$ReproductionTimer.wait_time = rand_range(3.75,4.25)
+		$ReproductionTimer.wait_time = rand_range(5.75,6.25)
 	if Gen == 2:
 		$SelfDestruction.start()
 		$ReproductionTimer.stop()
@@ -43,11 +43,9 @@ func GetGen():
 	else:
 		$CellDetectionArea.scale = Vector2(1,1)
 	if Gen == 4:
-		self.add_to_group("Allies")
+		if self.is_in_group("Enemies"):
+			self.remove_from_group("Enemies")
 		$ReproductionTimer.wait_time = rand_range(3.25,3.75)
-	else:
-		if self.is_in_group("Allies"):
-			self.remove_from_group("Allies")
 
 func _on_Timer_timeout():
 	$Sprite.play("Divide")
@@ -103,7 +101,7 @@ func _on_SelfDestruction_timeout():
 	queue_free()
 
 func _on_CellDetectionArea_area_entered(area):
-	if area.owner.has_method("hit") and area.owner.is_in_group("Allies") and !self.is_in_group("Allies"):
+	if area.owner.has_method("hit") and area.owner.is_in_group("Allies") and self.is_in_group("Enemies"):
 		area.owner.hit()
 		$CellDetectionArea/CollisionShape2D.set_deferred("disabled", true)
 		$AtkCooldown.start()

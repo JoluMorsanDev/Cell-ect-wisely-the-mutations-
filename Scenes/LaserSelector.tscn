@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Assets/Sprites/MutationLaserDedM.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Sprites/MutationSelector.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Sprites/MutationLaserResetM.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Sprites/MutationLaserDefM.png" type="Texture" id=4]
 [ext_resource path="res://Scripts/LaserSelector.gd" type="Script" id=5]
+[ext_resource path="res://Scenes/Laser.tscn" type="PackedScene" id=6]
 
 [sub_resource type="CanvasItemMaterial" id=1]
 light_mode = 1
@@ -20,6 +21,7 @@ script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+Laser = ExtResource( 6 )
 
 [node name="DedLaser" type="TextureButton" parent="."]
 use_parent_material = true
@@ -44,3 +46,8 @@ margin_left = 220.0
 margin_right = 300.0
 margin_bottom = 80.0
 texture_normal = ExtResource( 3 )
+
+[connection signal="pressed" from="." to="." method="_on_LaserSelector_pressed"]
+[connection signal="pressed" from="DedLaser" to="." method="_on_DedLaser_pressed"]
+[connection signal="pressed" from="MutateLaser" to="." method="_on_MutateLaser_pressed"]
+[connection signal="pressed" from="ResetLaser" to="." method="_on_ResetLaser_pressed"]

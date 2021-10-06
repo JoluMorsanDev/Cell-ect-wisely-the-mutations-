@@ -43,6 +43,8 @@ func GetGen():
 	else:
 		$CellDetectionArea.scale = Vector2(1,1)
 	if Gen == 4:
+		if self.is_in_group("Allies"):
+			self.remove_from_group("Allies")
 		self.add_to_group("Enemies")
 		$ReproductionTimer.wait_time = rand_range(3.25,3.75)
 	else:
@@ -103,7 +105,7 @@ func _on_SelfDestruction_timeout():
 	queue_free()
 
 func _on_CellDetectionArea_area_entered(area):
-	if area.owner.has_method("hit") and area.owner.is_in_group("Enemies") and !self.is_in_group("Enemies"):
+	if area.owner.has_method("hit") and area.owner.is_in_group("Enemies") and self.is_in_group("Allies"):
 		area.owner.hit()
 		$CellDetectionArea/CollisionShape2D.set_deferred("disabled", true)
 		$AtkCooldown.start()
